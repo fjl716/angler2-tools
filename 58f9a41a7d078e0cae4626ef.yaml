@@ -1,0 +1,49 @@
+containers:
+  websocket:
+    events:
+      58f5a82bd0c65dbcb8559f21:
+        event: mongo.paging
+        result:
+        - mongo.paging
+      zookeeper_delete:
+        event: zookeeper.delete
+        package: angler.events.zookeeper.delete
+      zookeeper_get:
+        event: zookeeper.get
+        package: angler.events.zookeeper.get
+      zookeeper_get_children:
+        event: zookeeper.get_children
+        package: angler.events.zookeeper.get_children
+      zookeeper_set:
+        event: zookeeper.set
+        package: angler.events.zookeeper.set
+    protocol:
+      type: json
+    source:
+      port: '8081'
+      type: websocket
+id: 58f9a41a7d078e0cae4626ef
+name: cloud-room
+services:
+  mongo:
+    collections:
+    - init:
+      - id: new_id()
+      name: sidebar
+      simple:
+      - _id
+      - name
+    - init:
+      - id: new_id()
+      name: user
+      simple:
+      - _id
+      - name
+    database: cloudroom
+    host: localhost
+    package: angler.services.mongo
+    port: 27017
+  zookeeper:
+    hosts: 127.0.0.1:2181
+    base_path: /
+    package: angler.services.zookeeper
